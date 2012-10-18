@@ -1,0 +1,20 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+
+<h1>Your programtic Catalog</h1>
+
+<% @products.each do |product| %>
+  <div class="entry">
+    <%= image_tag(product.image_url) %>
+    <h3><%= product.title %></h3>
+    <%= sanitize product.description %>
+    <div class="price_line">
+      <!-- the sprintf method is work but embeded with internationalizing problems in future
+        <span class="price"><%= product.price %></span>
+        <span class="price"><%= sprintf("$%0.02f",product.price) %></span>
+      -->
+        <span class="price"><%= number_to_currency(product.price) %></span>
+    </div>
+  </div>
+<% end %>
