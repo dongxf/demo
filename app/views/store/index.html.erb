@@ -3,10 +3,14 @@
 <% end %>
 
 <h1>Your programtic Catalog</h1>
-
+<% if @jsd_counter > 10 && @cart.line_items.count == 0 %>
+        <!-- <p>Hi, it's so nice to meet you <%= pluralize @jsd_counter, 'time'%> here<p> -->
+        <p>亲，如果有任何需要请随时呼唤我们的服务专员</p>
+<% end %>
 <% @products.each do |product| %>
   <div class="entry">
-    <%= image_tag(product.image_url) %>
+    <%= link_to image_tag(product.image_url), products_path, :method =>:post %>
+    <!-- <%= image_tag(product.image_url) %> -->
     <h3><%= product.title %></h3>
     <%= sanitize product.description %>
     <div class="price_line">
@@ -15,6 +19,7 @@
         <span class="price"><%= sprintf("$%0.02f",product.price) %></span>
       -->
         <span class="price"><%= number_to_currency(product.price) %></span>
+        <%= button_to 'Add to cart', line_items_path(:product_id => product ) %>
     </div>
   </div>
 <% end %>

@@ -152,3 +152,8 @@
   font-weight: bold;
   margin-right: 2em;
 }
+
+/* Styles for cart inline */
+#store .entry form, #store .entry form div {
+  display: inline;
+}

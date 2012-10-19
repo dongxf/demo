@@ -20,3 +20,12 @@ ruby:
     delivered fast, you should add ruby to your toolbox.
   price: 49.99
   image_url: ruby.png
+
+Moyan:
+  title: Mo Yan
+  description:
+    Mo Yan is 2012 Nobel prize winner.
+    language out there. If you need to get working programs
+    delivered fast, you should add ruby to your toolbox.
+  price: 49.99
+  image_url: ruby.png

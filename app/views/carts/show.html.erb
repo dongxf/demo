@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+<h2>Your Programtic Cart</h2>
+<ol>
+  <% for item in @cart.line_items %>
+          <li><%= item.product.title %></li>
+  <% end %>
+</ol>
+
+<%= link_to 'Edit', edit_cart_path(@cart) %>
+<%= link_to 'Back', carts_path %>
