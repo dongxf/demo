@@ -2,6 +2,7 @@
 class LineItemsController < ApplicationController
   # GET /line_items
   # GET /line_items.json
+
   def index
     @line_items = LineItem.all
 
@@ -40,9 +41,10 @@ class LineItemsController < ApplicationController
 
   # POST /line_items
   # POST /line_items.json
+
   def create
-    @cart = current_cart
     product = Product.find(params[:product_id])
+    @cart = current_cart
 
     @line_item = @cart.add_product(product.id)
     #----book statement
@@ -82,12 +84,14 @@ class LineItemsController < ApplicationController
 
   # DELETE /line_items/1
   # DELETE /line_items/1.json
+
   def destroy
     @line_item = LineItem.find(params[:id])
     @line_item.destroy
+    @cart = current_cart
 
     respond_to do |format|
-      format.html { redirect_to line_items_url }
+      format.html { redirect_to @cart }
       format.json { head :no_content }
     end
   end

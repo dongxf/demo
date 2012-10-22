@@ -9,6 +9,7 @@ class Cart < ActiveRecord::Base
       current_item.quantity += 1
     else
       current_item = LineItem.new(:product_id=>product_id)
+      current_item.price = current_item.product.price #record current price
       line_items << current_item
     end
     current_item
