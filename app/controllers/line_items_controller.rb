@@ -44,20 +44,17 @@ class LineItemsController < ApplicationController
     @cart = current_cart
     product = Product.find(params[:product_id])
 
-    #----mass-assign errors
-    #@line_item = @cart.line_items.build(:product => product)
-    #----method 1
-    @line_item = LineItem.new()
-    @line_item.product_id=product.id
-    @line_item.cart_id=@cart.id
-
-    #----default statment
+    @line_item = @cart.add_product(product.id)
+    #----book statement
+    #@line_item = @cart.line_items.build(:product_id => product.id)
+    #----default statement
     #@line_item = LineItem.new(params[:line_item])
 
     respond_to do |format|
       if @line_item.save
-        session[:ksg_counter]=0 #不再是空手逛的客户
-        format.html { redirect_to @line_item.cart, notice: "Line item #{@line_item.product.title} was successfully added. #{@cart.line_items.count} items" }
+        #session[:ksg_counter]=0 #不再是空手逛的客户
+        format.html { redirect_to @line_item.cart }
+        #format.html { redirect_to @line_item.cart, notice: "Line item #{@line_item.product.title} was successfully added. #{@cart.line_items.count} items" }
         #format.html { redirect_to @line_item, notice: 'Line item was successfully created.' }
         format.json { render json: @line_item, status: :created, location: @line_item }
       else

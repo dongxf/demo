@@ -3,7 +3,6 @@ class CartsController < ApplicationController
   # GET /carts.json
   def index
     @carts = Cart.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @carts }
@@ -13,11 +12,16 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
+    begin
     @cart = Cart.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @cart }
+    rescue Exception => e
+      logger.error "#{e}"
+      redirect_to store_url, :notice => "#{e}"
+    else
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @cart }
+      end
     end
   end
 
@@ -44,7 +48,8 @@ class CartsController < ApplicationController
 
     respond_to do |format|
       if @cart.save
-        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
+        format.html { redirect_to @cart}
+        #format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
         format.json { render json: @cart, status: :created, location: @cart }
       else
         format.html { render action: "new" }
@@ -76,7 +81,7 @@ class CartsController < ApplicationController
     @cart.destroy
 
     respond_to do |format|
-      format.html { redirect_to carts_url }
+      format.html { redirect_to store_url, :notice=>'Your cart is currently empty' }
       format.json { head :no_content }
     end
   end

@@ -3,10 +3,6 @@
 <% end %>
 
 <h1>Your programtic Catalog</h1>
-<% if @jsd_counter > 10 && @cart.line_items.count == 0 %>
-        <!-- <p>Hi, it's so nice to meet you <%= pluralize @jsd_counter, 'time'%> here<p> -->
-        <p>亲，如果有任何需要请随时呼唤我们的服务专员</p>
-<% end %>
 <% @products.each do |product| %>
   <div class="entry">
     <%= link_to image_tag(product.image_url), products_path, :method =>:post %>
