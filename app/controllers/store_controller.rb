@@ -1,7 +1,7 @@
 #encoding:utf-8
 class StoreController < ApplicationController
   def index
-    @cart = current_cart
     @products = Product.all
+    @cart = current_cart
   end
 end
